@@ -1,0 +1,32 @@
+# @GatewayAddress = https://cdw-openai-20231015.openai.azure.com
+@GatewayAddress = https://cdw-aoaigateway-202-ca.lemonplant-754e6da0.westus3.azurecontainerapps.io
+
+POST https://login.microsoftonline.com/{{$dotenv TENANT_ID}}/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&client_id={{$dotenv AAD_APPLICATION_ID}}
+&client_secret={{$dotenv AAD_CLIENT_SECRET}}
+&resource=api://{{$dotenv AAD_APPLICATION_ID}}
+
+###
+
+POST {{GatewayAddress}}/openai/deployments/gpt-4/chat/completions?api-version=2024-02-15-preview
+Content-Type: application/json
+api-key: no-longer-used-so-ignore
+Authorization: Bearer {{$dotenv ACCESS_TOKEN}}
+
+{
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are an AI assistant that helps people find information."
+        },
+        {
+            "role": "user",
+            "content": "What is the first letter of the alphabet?"
+        }
+    ]
+}
+
+###

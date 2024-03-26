@@ -5,3 +5,8 @@ metadata:
   template: aoai-smart-loadbalancing@0.0.1
 infra:
     provider: "bicep"
+services:
+  gateway:
+    language: csharp
+    project: ./src
+    host: containerapp

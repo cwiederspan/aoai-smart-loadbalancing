@@ -135,4 +135,8 @@ output SERVICE_WEB_NAME string = app.outputs.name
 output SERVICE_WEB_URI string = app.outputs.uri
 output SERVICE_WEB_IMAGE_NAME string = app.outputs.imageName
 
+output environmentName string = containerApps.outputs.environmentName
+output registryLoginServer string = containerApps.outputs.registryLoginServer
+output registryName string = containerApps.outputs.registryName
+
 output uri string = app.outputs.uri

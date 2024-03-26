@@ -60,7 +60,7 @@ module web 'web.bicep' = {
   params: {
     name: replace('${take(prefix, 19)}-ca', '--', '-')
     location: location
-    tags: tags
+    tags: union(tags, { 'azd-service-name': 'gateway' })
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     logAnalyticsWorkspaceName: monitoring.outputs.logAnalyticsWorkspaceName
     identityName: '${prefix}-id-web'
@@ -74,3 +74,11 @@ module web 'web.bicep' = {
     backend_2_api_key: backend_2_api_key
   }
 }
+
+// App outputs
+output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString
+output APPLICATIONINSIGHTS_NAME string = monitoring.outputs.applicationInsightsName
+output AZURE_CONTAINER_ENVIRONMENT_NAME string = web.outputs.environmentName
+output AZURE_CONTAINER_REGISTRY_ENDPOINT string = web.outputs.registryLoginServer
+output AZURE_CONTAINER_REGISTRY_NAME string = web.outputs.registryName
+output SERVICE_WEB_NAME string = web.outputs.SERVICE_WEB_NAME
